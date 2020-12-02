@@ -1,5 +1,6 @@
 window.addEventListener('load', () => {
 	const el = $('#app');
+	const appTemplate = Handlebars.compile($('#app-template').html());
 	const errorTemplate = Handlebars.compile($('#error-template').html());
 
 	const router = new Router({
@@ -14,5 +15,17 @@ window.addEventListener('load', () => {
 	});
 
 	router.navigateTo('');
-	el.html("Hi there!");
+	const html = appTemplate();
+	el.html(html);
+
+	$('#btnRun').click(async (evt) => {
+		let res = await $.get("/api/run");
+		console.log(res);
+	})
+
+	$('#btnCheck').click(async (evt) => {
+		let files = await $.get("/api/check");
+		console.log(files);
+	})
+
 });
