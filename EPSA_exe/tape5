@@ -1,0 +1,52 @@
+title   sample problem 1, s. s. elastic beam, uniform load, 2 sheets
+tstep   2000 0.000005 25
+relax   444.  0.9
+
+sheet   1
+option  0 0
+node    1   0.00   0.00   0.00
+node    2   1.25   0.00   0.00
+node    3   2.50   0.00   0.00
+node    4   3.75   0.00   0.00
+node    5   5.00   0.00   0.00
+node    6   0.00 100.00   0.00 
+matlq   101   1   30000000.   .0   .003
+bmsect  100   2   1.0   0.5
+beam2   1   101   100   1   2   6
+beam2   2   101   100   2   3   6
+beam2   3   101   100   3   4   6
+beam2   4   101   100   4   5   6
+cload   2 4 0 0 0. -125.00  0.
+        0. 0.   .000008 1.   1. 1.
+cload   5 5 0 0 0. -62.50   0.
+        0. 0.   .000008 1.   1. 1.
+drvelo  5  0  2
+drdisp  5  0  2
+drstrs  4  0 18
+endsht  1
+
+sheet   2
+option  0 0
+node    1   5.00   0.00   0.00
+node    2   6.25   0.00   0.00
+node    3   7.50   0.00   0.00
+node    4   8.75   0.00   0.00
+node    5  10.00   0.00   0.00
+node    6   0.00 100.00   0.00 
+matlq   101   1   30000000.   .0   .003
+bmsect  100   2   1.0   0.5
+beam2   1   101   100   1   2   6
+beam2   2   101   100   2   3   6
+beam2   3   101   100   3   4   6
+beam2   4   101   100   4   5   6
+cload   1 1 0 0 0. -62.50   0.
+        0. 0.   .000008 1.   1. 1.
+cload   2 4 0 0 0. -125.00  0.
+        0. 0.   .000008 1.   1. 1.
+endsht  2
+
+suport  1 1 1 0 0  1 1 1 0 0 0
+suport  2 5 5 0 0  1 1 1 0 0 0 
+momcon  1 5 5 0 0  2 1 1 0 0
+ 
+
