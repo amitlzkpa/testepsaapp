@@ -1,6 +1,7 @@
 require('dotenv').config(); // read .env files
 const express = require('express');
 const fs = require('fs');
+const { exec } = require("child_process");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,7 +13,12 @@ app.use(express.static('public'));
 app.use('/scripts', express.static(`${__dirname}/node_modules/`));
 
 app.get('/api/run', async (req, res) => {
-	return res.json({ foo: 'bar' });
+	try {
+		exec('./EPSA/epsa3_1.00Z1_x64.exe');
+		return res.json({ foo: 'bar' });
+	} catch(ex) {
+		return res.json(ex);
+	}
 });
 
 app.get('/api/check', async (req, res) => {
